@@ -1,44 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no"/>
-<meta name="apple-mobile-web-app-capable" content="yes"/>
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
-<meta name="apple-mobile-web-app-title" content="PDF Fill"/>
-<meta name="mobile-web-app-capable" content="yes"/>
-<meta name="theme-color" content="#0f1115"/>
-<title>PDF Fill</title>
-<link rel="stylesheet" href="app.css"/>
-</head>
-<body>
-<div id="app">
-  <header id="toolbar">
-    <div class="row primary">
-      <label class="btn primary" id="openBtn">Open PDF<input type="file" id="fileInput" accept="application/pdf" hidden/></label>
-      <button type="button" class="btn" id="undoBtn" disabled>Undo</button>
-      <button type="button" class="btn" id="checkBtn" aria-pressed="false" title="Checkmark mode">✓</button>
-      <button type="button" class="btn primary" id="saveBtn" disabled>Save PDF</button>
-    </div>
-    <div class="row secondary" id="sizeRow">
-      <span class="label">Size</span>
-      <button type="button" class="btn size" data-size="S">Small</button>
-      <button type="button" class="btn size active" data-size="M">Medium</button>
-      <button type="button" class="btn size" data-size="L">Large</button>
-    </div>
-    <div id="status" class="status" hidden></div>
-  </header>
-  <div id="hint" class="hint" hidden>Tap where you want to write</div>
-  <main id="pages" class="pages empty">
-    <div class="welcome">
-      <div class="welcome-icon">📄</div>
-      <h1>PDF Fill</h1>
-      <p>Open a scanned form, tap where you want to write, then Save PDF.</p>
-      <label class="btn primary big" for="fileInput">Open PDF</label>
-    </div>
-  </main>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
-<script type="module" src="app.js"></script>
-</body>
-</html>
+<!DOCTYPE html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>PDF Fill</title></head><body>
+<p id="s">Loading…</p>
+<script>
+(async()=>{
+  const n=4; let t='';
+  for(let i=0;i<n;i++){const r=await fetch('p'+i+'.txt'); if(!r.ok) throw new Error(i); t+=await r.text();}
+  document.open(); document.write(t); document.close();
+})().catch(e=>document.getElementById('s').textContent='Fail '+e);
+</script></body></html>
