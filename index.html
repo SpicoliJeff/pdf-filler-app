@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover, user-scalable=no"/>
-<title>PDF Fill</title>
-</head>
-<body>
-<p>Loading… Open PDF via CDN build — see workspace file if truncated.</p>
-<script>location.replace('https://cdn.jsdelivr.net/gh/SpicoliJeff/pdf-filler-app@main/index.html')</script>
-</body>
-</html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PDF Fill</title></head><body>
+<p id="s">Loading PDF Fill… Open PDF</p>
+<script>
+(async()=>{
+  const n=4; let t='';
+  const base = location.origin + location.pathname.replace(/[^/]*$/, '');
+  for(let i=0;i<n;i++){
+    const r=await fetch(base+'p'+i+'.txt');
+    if(!r.ok) throw new Error('part '+i+' '+r.status);
+    t+=await r.text();
+  }
+  document.open(); document.write(t); document.close();
+})().catch(e=>{document.getElementById('s').textContent='Fail '+e;});
+</script></body></html>
