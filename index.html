@@ -1,1 +1,13 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>PDF Fill</title></head><body>
+<p id="s">Loading PDF Fill… Open PDF</p>
+<!-- Open PDF -->
+<script type="module">
+const n=4;
+const parts=await Promise.all([...Array(n).keys()].map(i=>fetch("p"+i+".txt").then(r=>{if(!r.ok)throw new Error(r.status);return r.text();})));
+const bin=Uint8Array.from(atob(parts.join("")),c=>c.charCodeAt(0));
+const ds=new DecompressionStream("gzip");
+const html=await new Response(new Blob([bin]).stream().pipeThrough(ds)).text();
+document.open();document.write(html);document.close();
+</script></body></html>
